@@ -9,7 +9,7 @@ export const Posts = () => {
 
     useEffect(
         () => {
-            return fetch ("http://localhost:8088/posts")
+             fetch ("http://localhost:8088/posts")
             .then(response => response.json())
             .then((posts) => {
                 updatePosts(posts)
