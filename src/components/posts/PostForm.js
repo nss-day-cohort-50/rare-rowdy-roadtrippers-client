@@ -10,15 +10,15 @@ export const PostForm = () => {
 
     const history = useHistory()
 
-    const submitPost = () => {
-
+    const submitPost = (event) => {
+        event.preventDefault()
         const newPost = {
-            user_id: parseInt(localStorage.getItem("lu_token")),
-            category_id: post.category,
+            user_id: parseInt(localStorage.getItem("rare_user_id")),
+            category_id: 1,
             title: post.title,
             publication_date: Date(),
             content: post.content,
-            approved: Boolean
+            approved: true
         }
 
         const fetchOption = {
@@ -29,7 +29,7 @@ export const PostForm = () => {
             body: JSON.stringify(newPost)
         }
 
-        return fetch("http://localhost:8088", fetchOption)
+        return fetch("http://localhost:8088/posts", fetchOption)
             .then(() => {
                 history.push("/posts")
             })
@@ -61,7 +61,7 @@ export const PostForm = () => {
                     <div className="postForm">
                         <label htmlFor="content">Post Entry</label>
                         <textarea
-                            onchange={
+                            onChange={
                                 (event) => {
                                     const copy = { ...post }
                                     copy.content = event.target.value
