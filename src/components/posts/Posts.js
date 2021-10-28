@@ -38,8 +38,8 @@ export const Posts = () => {
 
             {
                 posts.map(
-                    (post) => {
-                        return <div key={post.id} className="posts__list">
+                    (post) => { 
+                        return <> <div key={post.id} className="posts__list">
                             <section>
                                 <h4 key={post.id}>Posted by...</h4>
                                 <div className="item__postList">Post Title: {post.title}</div>
@@ -47,6 +47,10 @@ export const Posts = () => {
                                 <div className="item__postList">Category: {post.category}</div>
                             </section>
                         </div>
+                        <button color="primary" onClick={() => {
+                            deletePost(post.id)
+                        }}>Delete</button>
+                        </>
                     }
                 ).reverse()
             }
