@@ -23,7 +23,8 @@ export const Posts = () => {
             method: "DELETE"
         })
             .then(() => {
-                return fetch ("http://localhost:8088/posts")
+                fetch ("http://localhost:8088/posts")
+                .then(response => response.json())
                 .then((posts) => {
                     updatePosts(posts)
                 })
@@ -38,8 +39,8 @@ export const Posts = () => {
 
             {
                 posts.map(
-                    (post) => {
-                        return <div key={post.id} className="posts__list">
+                    (post) => { 
+                        return <> <div key={post.id} className="posts__list">
                             <section>
                                 <h4 key={post.id}>Posted by...</h4>
                                 <div className="item__postList">Post Title: {post.title}</div>
@@ -48,6 +49,10 @@ export const Posts = () => {
                                 <Link to={`/posts/${post.id}`}>Post Details</Link>
                             </section>
                         </div>
+                        <button color="primary" onClick={() => {
+                            deletePost(post.id)
+                        }}>Delete</button>
+                        </>
                     }
                 ).reverse()
             }
