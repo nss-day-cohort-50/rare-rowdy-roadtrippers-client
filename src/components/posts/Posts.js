@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react"
-import { useHistory } from "react-router-dom"
+import { Link, useHistory } from "react-router-dom"
 
 
 export const Posts = () => {
@@ -45,6 +45,7 @@ export const Posts = () => {
                                 <div className="item__postList">Post Title: {post.title}</div>
                                 <div className="item__postList">Posted by: {post.user.username}</div>
                                 <div className="item__postList">Category: {post.category}</div>
+                                <Link to={`/posts/${post.id}`}>Post Details</Link>
                             </section>
                         </div>
                         <button color="primary" onClick={() => {
