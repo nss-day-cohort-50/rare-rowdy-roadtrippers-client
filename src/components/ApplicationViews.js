@@ -1,5 +1,6 @@
 import React from "react"
 import { Route } from "react-router-dom"
+import { MyPosts } from "./myPosts/myPosts"
 import { PostForm } from "./posts/PostForm"
 import { Posts } from "./posts/Posts"
 
@@ -16,6 +17,9 @@ export const ApplicationViews = () => {
         </Route>
         <Route exact path="/posts/create">
             <PostForm />
+        </Route>
+        <Route exact path ="/myPosts">
+            <MyPosts />
         </Route>
     </>
     )
