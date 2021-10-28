@@ -43,14 +43,12 @@ export const Posts = () => {
                             <section>
                                 <h4 key={post.id}>Posted by...</h4>
                                 <div className="item__postList">Post Title: {post.title}</div>
-                                <div className="item__postList">Posted by: {post.user_id}</div>
-                                <div className="item__postList">Content: {post.content}</div>
+                                <div className="item__postList">Posted by: {post.user.username}</div>
                                 <div className="item__postList">Category: {post.category}</div>
-                                <div className="item__postList">Publication Date: {post.date}</div>
                             </section>
                         </div>
                     }
-                )
+                ).reverse()
             }
         </>
     )
