@@ -4,6 +4,9 @@ import { MyPosts } from "./myPosts/myPosts"
 import { PostDetails } from "./posts/PostDetails"
 import { PostForm } from "./posts/PostForm"
 import { Posts } from "./posts/Posts"
+import { TagDetails } from "./tags/TagDetails"
+import { TagForm } from "./tags/TagForm"
+import { TagsList } from "./tags/TagsList"
 
 {/* <main style={{
             margin: "5rem 2rem",
@@ -24,6 +27,15 @@ export const ApplicationViews = () => {
         </Route>
         <Route exact path ="/myPosts">
             <MyPosts />
+        </Route>
+        <Route exact path ="/tags">
+            <TagsList />
+        </Route>
+        <Route exact path ="/tags/create">
+            <TagForm />
+        </Route>
+        <Route exact path ="/tags/:id(\d+)">
+            <TagDetails />
         </Route>
     </>
     )

@@ -2,14 +2,14 @@ import React, { useEffect, useState } from "react"
 import { Link, useHistory } from "react-router-dom"
 
 
-export const Tags = () => {
+export const TagsList = () => {
     const [tags, updateTags] = useState([])
     const history = useHistory()
 
 
     useEffect(
         () => {
-             fetch ("http://localhost:8088/tags")
+            fetch ("http://localhost:8088/tags")
             .then(response => response.json())
             .then((Tags) => {
                 updateTags(Tags)
@@ -43,11 +43,11 @@ export const Tags = () => {
                     (tag) => {
                         return <div key={tag.id} className="tags__list">
                             <section>
-                                <div className="item__tagList">Label: {tag.label}</div>
+                                <div className="item__tagList">{tag.label}</div>
                             </section>
                         </div>
                     }
-                )
+                ).sort()
             }
         </>
     )
