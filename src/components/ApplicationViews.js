@@ -1,5 +1,7 @@
 import React from "react"
 import { Route } from "react-router-dom"
+import { CategoryForm } from "./categories/CategoryForm"
+import { CategoryList } from "./categories/CategoryList"
 import { MyPosts } from "./myPosts/myPosts"
 import { PostDetails } from "./posts/PostDetails"
 import { PostForm } from "./posts/PostForm"
@@ -39,6 +41,12 @@ export const ApplicationViews = () => {
         </Route>
         <Route exact path ="/tags/:id(\d+)">
             <TagDetails />
+        </Route>
+        <Route exact path="/categories">
+            <CategoryList />
+        </Route>
+        <Route exact path="/categories/create">
+            <CategoryForm />
         </Route>
     </>
     )
