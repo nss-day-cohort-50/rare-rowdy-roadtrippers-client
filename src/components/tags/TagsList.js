@@ -10,11 +10,11 @@ export const TagsList = () => {
 
     useEffect(
         () => {
-            fetch ("http://localhost:8088/tags")
-            .then(response => response.json())
-            .then((Tags) => {
-                updateTags(Tags)
-            })
+            fetch("http://localhost:8088/tags")
+                .then(response => response.json())
+                .then((Tags) => {
+                    updateTags(Tags)
+                })
         },
         []
     )
@@ -24,11 +24,11 @@ export const TagsList = () => {
             method: "DELETE"
         })
             .then(() => {
-                fetch ("http://localhost:8088/tags")
-                .then(res => res.json())
-                .then((tags) => {
-                    updateTags(tags)
-                })
+                fetch("http://localhost:8088/tags")
+                    .then(res => res.json())
+                    .then((tags) => {
+                        updateTags(tags)
+                    })
             })
     }
 
@@ -48,6 +48,7 @@ export const TagsList = () => {
         })
 
     };
+    
 
     return (
         <>
@@ -56,21 +57,28 @@ export const TagsList = () => {
             </div>
 
             <h4>Tag List</h4>
-            {
-                tags.map(
-                    (tag) => {
-                        return <><div key={tag.id} className="tags__list">
-                            <section>
-                                <div className="item__tagList">{tag.label}</div>
-                            </section>
-                        </div>
-                        <button color="primary" onClick={() => {
-                            confirmDelete(tag.id)
-                        }}>Delete</button>
-                        </>
-                    }
-                ).sort()
-            }
+            <form>
+
+                {
+                    tags.map(
+                        (tag) => {
+                            return <><div key={tag.id} className="tags__list">
+                                <fieldset>
+                                    <label htmlFor="item__tagList">{tag.label}</label>
+                                    <input
+                                        type="checkbox"
+                                        id="item__tagList"
+                                        className="item__tagList"/>
+                                </fieldset>
+                            </div>
+                                <button color="primary" onClick={() => {
+                                    confirmDelete(tag.id)
+                                }}>Delete</button>
+                            </>
+                        }
+                    ).sort()
+                }
+            </form>
         </>
     )
 }

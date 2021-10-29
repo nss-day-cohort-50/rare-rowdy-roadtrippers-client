@@ -30,6 +30,9 @@ export const ApplicationViews = () => {
         <Route exact path ="/myPosts">
             <MyPosts />
         </Route>
+        <Route exact path ="/tags/posts/:post_id">
+            <TagsList />
+        </Route>
         <Route exact path ="/tags">
             <TagsList />
         </Route>
