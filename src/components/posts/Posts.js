@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react"
 import { Link, useHistory } from "react-router-dom"
+import { confirmAlert } from "react-confirm-alert"
 
 
 export const Posts = () => {
@@ -31,6 +32,23 @@ export const Posts = () => {
             })
     }
 
+    const confirmPostDelete = (id) => {
+        confirmAlert({
+            message: 'Are you sure you want to DELETE this request?',
+            buttons: [
+                {
+                    label: 'Yes',
+                    onClick: () => { deletePost(id) }
+                },
+                {
+                    label: 'Cancel',
+                    onClick: () => alert('Cancel Request')
+                }
+            ]
+        })
+
+    };
+
     return (
         <>
             <div>
@@ -50,7 +68,7 @@ export const Posts = () => {
                             </section>
                         </div>
                         <button color="primary" onClick={() => {
-                            deletePost(post.id)
+                            confirmPostDelete(post.id)
                         }}>Delete</button>
                         </>
                     }
