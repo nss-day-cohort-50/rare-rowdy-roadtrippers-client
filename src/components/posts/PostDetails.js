@@ -19,7 +19,7 @@ export const PostDetails = () => {
 
     useEffect(
         () => {
-             fetch(`http://localhost:8088/posts/${id}`)
+            fetch(`http://localhost:8088/posts/${id}`)
                 .then(response => response.json())
                 .then((data) => {
                     updatePost(data)
@@ -29,11 +29,17 @@ export const PostDetails = () => {
     )
 
 
-        const ReturnHome = () => {
-            return <button className="button__return">
-                <Link to="/posts">Return to Posts List</Link>
-            </button>
-        }
+    const ReturnHome = () => {
+        return <button className="button__return">
+            <Link to="/posts">Return to Posts List</Link>
+        </button>
+    }
+
+    const ManageTags = () => {
+        return <button className="button_tagManagement">
+            <Link to={`/tags/posts/${id}`}>Manage Tags</Link>
+        </button>
+    }
 
     return (
         <>
@@ -43,6 +49,7 @@ export const PostDetails = () => {
                 <div className="post__item">Content: {post?.content}</div>
                 <div className="post__item">Date Posted: {post?.publication_date}</div>
                 <div className="post__item">Posted By: {post?.user?.first_name} {post?.user?.last_name}</div>
+                <div className="button__return"><ManageTags /></div>
                 <div className="button__return"><ReturnHome /></div>
             </section>
         </>
