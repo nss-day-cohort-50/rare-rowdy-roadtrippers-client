@@ -26,12 +26,8 @@ export const Rare = () => (
             }
         }} />
 
-        <Route path="/register" render={() => {
-            if (localStorage.getItem("rare_user_id")) {
-                return <Redirect to="/" />
-            } else {
-                return <Register />
-            }
-        }} />
+        <Route path="/register">
+            <Register />
+        </Route>
     </>
 )
