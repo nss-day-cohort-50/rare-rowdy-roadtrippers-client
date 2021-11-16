@@ -69,8 +69,8 @@ export const Posts = () => {
                             <section>
                                 <h4 key={post.id}>Posted by...</h4>
                                 <div className="item__postList">Post Title: {post.title}</div>
-                                <div className="item__postList">Posted by: {post.user.username}</div>
-                                <div className="item__postList">Category: {post.category}</div>
+                                <div className="item__postList">Posted by: {post?.rare_user?.user.username}</div>
+                                <div className="item__postList">Category: {post.category.label}</div>
                                 <Link to={`/posts/${post.id}`}>Post Details</Link>
                             </section>
                         </div>
