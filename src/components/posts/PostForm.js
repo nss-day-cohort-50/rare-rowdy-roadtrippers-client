@@ -17,6 +17,7 @@ export const PostForm = () => {
             category_id: 1,
             title: post.title,
             publication_date: Date(),
+            image_url: "",
             content: post.content,
             approved: true
         }
