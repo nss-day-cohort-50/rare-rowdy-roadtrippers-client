@@ -5,12 +5,16 @@ export const MyPosts = () => {
     const [posts, setPosts] = useState([]);
     
   
-    const userId = parseInt(localStorage.getItem("rare_user_id"));
+    const userId = parseInt(localStorage.getItem("token"));
   
   
     useEffect(
         () => {
-             fetch (`http://localhost:8088/posts?user_id=${userId}`)
+             fetch (`http://localhost:8000/posts?user_id=${userId}`, {
+               headers: {
+                 "Authorization": `Token ${localStorage.getItem("token")}`
+               }
+             })
             .then(response => response.json())
             .then((posts) => {
                 setPosts(posts)

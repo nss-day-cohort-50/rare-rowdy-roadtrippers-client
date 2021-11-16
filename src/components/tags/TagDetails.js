@@ -10,7 +10,11 @@ export const TagDetails = () => {
 
     useEffect(
         () => {
-            fetch(`http://localhost:8088/tags`)
+            fetch(`http://localhost:8000/tags`, {
+                headers: {
+                    "Authorization": `Token ${localStorage.getItem("token")}`
+                }
+            })
                 .then(res => res.json())
                 .then(syncTagList)
         },
@@ -19,7 +23,11 @@ export const TagDetails = () => {
 
     useEffect(
         () => {
-             fetch(`http://localhost:8088/tags/${id}`)
+             fetch(`http://localhost:8000/tags/${id}`, {
+                 headers: {
+                     "Authorization": `Token ${localStorage.getItem("token")}`
+                 }
+             })
                 .then(response => response.json())
                 .then((data) => {
                     updateTag(data)

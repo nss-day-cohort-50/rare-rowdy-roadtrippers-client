@@ -9,9 +9,20 @@ export const Profile = (props) => {
     const { profile, getProfile } = useContext(ProfileContext)
     const { leaveEvent } = useContext(EventContext)
 
-    useEffect(() => {
-        getProfile()
-    }, [])
+    useEffect(
+        () => {
+            fetch(`http://localhost:8000/profile?user_id=${userId}`, {
+                headers: {
+                    "Authorization": `Token ${localStorage.getItem("token")}`
+                }
+            })
+                .then(response => response.json())
+                .then((data) => {
+                    getProfile(data)
+                })
+        },
+        []
+    )
 
     return (
         <article className="profile">

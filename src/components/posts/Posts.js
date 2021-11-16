@@ -10,7 +10,11 @@ export const Posts = () => {
 
     useEffect(
         () => {
-             fetch ("http://localhost:8088/posts")
+             fetch ("http://localhost:8000/posts", {
+                 headers: {
+                     "Authorization": `Token ${localStorage.getItem("token")}`
+                 }
+             })
             .then(response => response.json())
             .then((posts) => {
                 updatePosts(posts)
@@ -20,11 +24,14 @@ export const Posts = () => {
     )
 
     const deletePost = (id) => {
-        fetch(`http://localhost:8088/posts/${id}`, {
-            method: "DELETE"
+        fetch(`http://localhost:8000/posts/${id}`, {
+            method: "DELETE",
+            headers: {
+                "Authorization": `Token ${localStorage.getItem("token")}`
+            }
         })
             .then(() => {
-                fetch ("http://localhost:8088/posts")
+                fetch ("http://localhost:8000/posts")
                 .then(response => response.json())
                 .then((posts) => {
                     updatePosts(posts)

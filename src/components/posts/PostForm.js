@@ -13,10 +13,11 @@ export const PostForm = () => {
     const submitPost = (event) => {
         event.preventDefault()
         const newPost = {
-            user_id: parseInt(localStorage.getItem("rare_user_id")),
+            // user_id: parseInt(localStorage.getItem("rare_user_id")),
             category_id: 1,
             title: post.title,
             publication_date: Date(),
+            image_url: "",
             content: post.content,
             approved: true
         }
@@ -24,12 +25,13 @@ export const PostForm = () => {
         const fetchOption = {
             method: "POST",
             headers: {
-                "Content-Type": "application/json"
+                "Content-Type": "application/json",
+                "Authorization": `Token ${localStorage.getItem("token")}`
             },
             body: JSON.stringify(newPost)
         }
 
-        return fetch("http://localhost:8088/posts", fetchOption)
+        return fetch("http://localhost:8000/posts", fetchOption)
             .then(() => {
                 history.push("/posts")
             })
