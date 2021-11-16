@@ -10,7 +10,11 @@ export const PostDetails = () => {
 
     useEffect(
         () => {
-            fetch(`http://localhost:8088/posts`)
+            fetch(`http://localhost:8000/posts`, {
+                headers: {
+                    "Authorization": `Token ${localStorage.getItem("token")}`
+                }
+            })
                 .then(res => res.json())
                 .then(syncPostList)
         },
@@ -19,7 +23,11 @@ export const PostDetails = () => {
 
     useEffect(
         () => {
-            fetch(`http://localhost:8088/posts/${id}`)
+            fetch(`http://localhost:8000/posts/${id}`, {
+                headers: {
+                    "Authorization": `Token ${localStorage.getItem("token")}`
+                }
+            })
                 .then(response => response.json())
                 .then((data) => {
                     updatePost(data)

@@ -10,7 +10,11 @@ export const TagsList = () => {
 
     useEffect(
         () => {
-            fetch("http://localhost:8088/tags")
+            fetch("http://localhost:8000/tags", {
+                headers: {
+                    "Authorization": `Token ${localStorage.getItem("token")}`
+                }
+            })
                 .then(response => response.json())
                 .then((Tags) => {
                     updateTags(Tags)
@@ -21,10 +25,11 @@ export const TagsList = () => {
 
     const deleteTag = (id) => {
         fetch(`http://localhost:8088/tags/${id}`, {
-            method: "DELETE"
+            method: "DELETE",
+            "Authorization": `Token ${localStorage.getItem("token")}`
         })
             .then(() => {
-                fetch("http://localhost:8088/tags")
+                fetch("http://localhost:8000/tags")
                     .then(res => res.json())
                     .then((tags) => {
                         updateTags(tags)
