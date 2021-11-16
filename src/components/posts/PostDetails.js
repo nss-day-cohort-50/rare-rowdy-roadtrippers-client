@@ -56,7 +56,7 @@ export const PostDetails = () => {
                 <h3 className="post__heading">{post.title}</h3>
                 <div className="post__item">Content: {post?.content}</div>
                 <div className="post__item">Date Posted: {post?.publication_date}</div>
-                <div className="post__item">Posted By: {post?.user?.first_name} {post?.user?.last_name}</div>
+                <div className="post__item">Posted By: {post?.rare_user?.user.first_name} {post?.rare_user?.user.last_name}</div>
                 <div className="button__return"><ManageTags /></div>
                 <div className="button__return"><ReturnHome /></div>
             </section>
