@@ -8,12 +8,11 @@ export const MyPosts = () => {
   const history = useHistory()
 
 
-  const userId = parseInt(localStorage.getItem("token"));
 
 
   useEffect(
     () => {
-      fetch(`http://localhost:8000/posts?user_id=${userId}`, {
+      fetch(`http://localhost:8000/posts?get_posts_by_user`, {
         headers: {
           "Authorization": `Token ${localStorage.getItem("token")}`
         }
@@ -72,16 +71,16 @@ export const MyPosts = () => {
 
       {posts.map((post) => (
         <div key={post.id}>
-          <h2>Title: {post.title}</h2>
-          <h3>Posted on: {post.publication_date}</h3>
-          <h3>Content: {post.content} </h3>
+          <h2 className="item__postList">{post.title}</h2>
+          <div className="item__postList">Posted by: {post.rare_user.user.username}</div>
+          <div className="item__postList">Category: {post.category.label}</div>
           <Link to={`/posts/${post.id}`}>Post Details</Link>
           <button color="primary" onClick={() => {
             confirmPostDelete(post.id)
           }}>Delete</button>
 
         </div>
-      ))}
+      )).reverse()}
     </>
   );
 };
