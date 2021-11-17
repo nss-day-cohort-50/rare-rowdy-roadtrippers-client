@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react"
 import { useParams, useHistory, Link } from "react-router-dom"
+import { confirmAlert } from "react-confirm-alert"
 
 
 export const PostDetails = () => {
@@ -36,6 +37,46 @@ export const PostDetails = () => {
         [id]
     )
 
+    const deletePost = (id) => {
+        fetch(`http://localhost:8000/posts/${id}`, {
+            method: "DELETE",
+            headers: {
+                "Authorization": `Token ${localStorage.getItem("token")}`
+            }
+        })
+            .then(() => {
+                fetch("http://localhost:8000/posts", {
+                    headers: {
+                        "Authorization": `Token ${localStorage.getItem("token")}`
+                    }
+                })
+                    .then(response => response.json())
+                    .then((posts) => {
+                        syncPostList(posts)
+                    })
+                    .then(() => {
+                        history.push("/myPosts")
+                    })
+            })
+    }
+
+    const confirmPostDelete = (id) => {
+        confirmAlert({
+            message: 'Are you sure you want to DELETE this request?',
+            buttons: [
+                {
+                    label: 'Yes',
+                    onClick: () => { deletePost(id) }
+                },
+                {
+                    label: 'Cancel',
+                    onClick: () => alert('Cancel Request')
+                }
+            ]
+        })
+
+    };
+
 
     const ReturnHome = () => {
         return <button className="button__return">
@@ -59,6 +100,9 @@ export const PostDetails = () => {
                 <div className="post__item">Posted By: {post?.rare_user?.user.first_name} {post?.rare_user?.user.last_name}</div>
                 <div className="button__return"><ManageTags /></div>
                 <div className="button__return"><ReturnHome /></div>
+                <button color="primary" onClick={() => {
+                    confirmPostDelete(post.id)
+                }}>Delete</button>
             </section>
         </>
     )
