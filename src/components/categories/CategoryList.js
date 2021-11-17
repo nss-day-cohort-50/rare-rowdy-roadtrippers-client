@@ -10,7 +10,11 @@ export const CategoryList = () => {
 
     useEffect(
         () => {
-            fetch ("http://localhost:8088/categories")
+            fetch ("http://localhost:8000/categories", {
+                headers: {
+                    "Authorization": `Token ${localStorage.getItem("token")}`
+                }
+            })
             .then(response => response.json())
             .then((Categories) => {
                 updateCategories(Categories)
@@ -20,11 +24,18 @@ export const CategoryList = () => {
     )
 
     const deleteCategory = (id) => {
-        fetch(`http://localhost:8088/categories/${id}`, {
-            method: "DELETE"
+        fetch(`http://localhost:8000/categories/${id}`, {
+            method: "DELETE",
+            headers: {
+                "Authorization": `Token ${localStorage.getItem("token")}`
+            }
         })
             .then(() => {
-                fetch ("http://localhost:8088/categories")
+                fetch ("http://localhost:8000/categories", {
+                    headers: {
+                        "Authorization": `Token ${localStorage.getItem("token")}`
+                    }
+                })
                 .then(res => res.json())
                 .then((categories) => {
                     updateCategories(categories)

@@ -7,10 +7,24 @@ export const PostDetails = () => {
   const history = useHistory();
 
   useEffect(() => {
-    fetch(`http://localhost:8088/posts/${id}`)
-      .then((res) => res.json())
-      .then(updatePost);
-  }, []);
+    fetch(`http://localhost:8000/posts/${id}`, {
+      headers: {
+        Authorization: `Token ${localStorage.getItem("token")}`,
+      },
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        updatePost(data);
+      });
+  }, [id]);
+
+  const ManageTags = () => {
+    return (
+      <button className="button_tagManagement">
+        <Link to={`/tags/posts/${id}`}>Manage Tags</Link>
+      </button>
+    );
+  };
 
   const ReturnHome = () => {
     return (
@@ -19,11 +33,10 @@ export const PostDetails = () => {
       </button>
     );
   };
-
-  const ManageTags = () => {
+  const ViewComments = () => {
     return (
-      <button className="button_tagManagement">
-        <Link to={`/tags/posts/${id}`}>Manage Tags</Link>
+      <button className="button__return">
+        <Link to={`/posts/${id}/comments`}>View Comments</Link>
       </button>
     );
   };
@@ -36,13 +49,17 @@ export const PostDetails = () => {
         <div className="post__item">Content: {post?.content}</div>
         <div className="post__item">Date Posted: {post?.publication_date}</div>
         <div className="post__item">
-          Posted By: {post?.user?.first_name} {post?.user?.last_name}
+          Posted By: {post?.rare_user?.user.first_name}{" "}
+          {post?.rare_user?.user.last_name}
         </div>
         <div className="button__return">
           <ManageTags />
         </div>
         <div className="button__return">
           <ReturnHome />
+        </div>
+        <div className="button__return">
+          <ViewComments />
         </div>
       </section>
     </>

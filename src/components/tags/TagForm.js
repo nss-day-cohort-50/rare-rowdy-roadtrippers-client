@@ -18,12 +18,13 @@ export const TagForm = () => {
         const fetchOption = {
             method: "POST",
             headers: {
-                "Content-Type": "application/json"
+                "Content-Type": "application/json",
+                "Authorization": `Token ${localStorage.getItem("token")}`
             },
             body: JSON.stringify(newTag)
         }
 
-        return fetch("http://localhost:8088/tags", fetchOption)
+        return fetch("http://localhost:8000/tags", fetchOption)
             .then(() => {
                 history.push("/tags")
             })

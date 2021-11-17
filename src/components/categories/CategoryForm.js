@@ -18,12 +18,13 @@ export const CategoryForm = () => {
         const fetchOption = {
             method: "POST",
             headers: {
-                "Content-Type": "application/json"
+                "Content-Type": "application/json",
+                "Authorization": `Token ${localStorage.getItem("token")}`
             },
             body: JSON.stringify(newCategory)
         }
 
-        return fetch("http://localhost:8088/categories", fetchOption)
+        return fetch("http://localhost:8000/categories", fetchOption)
             .then(() => {
                 history.push("/categories")
             })
