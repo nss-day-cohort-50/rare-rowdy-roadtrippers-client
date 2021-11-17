@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { useParams, useHistory, Link } from "react-router-dom";
+import { confirmAlert } from "react-confirm-alert";
 
 export const PostDetails = () => {
   const [post, updatePost] = useState({});
+  const [postList, syncPostList] = useState([]);
   const { id } = useParams();
   const history = useHistory();
 
@@ -17,6 +19,46 @@ export const PostDetails = () => {
         updatePost(data);
       });
   }, [id]);
+
+  const deletePost = (id) => {
+    fetch(`http://localhost:8000/posts/${id}`, {
+      method: "DELETE",
+      headers: {
+        Authorization: `Token ${localStorage.getItem("token")}`,
+      },
+    }).then(() => {
+      fetch("http://localhost:8000/posts", {
+        headers: {
+          Authorization: `Token ${localStorage.getItem("token")}`,
+        },
+      })
+        .then((response) => response.json())
+        .then((posts) => {
+          syncPostList(posts);
+        })
+        .then(() => {
+          history.push("/myPosts");
+        });
+    });
+  };
+
+  const confirmPostDelete = (id) => {
+    confirmAlert({
+      message: "Are you sure you want to DELETE this request?",
+      buttons: [
+        {
+          label: "Yes",
+          onClick: () => {
+            deletePost(id);
+          },
+        },
+        {
+          label: "Cancel",
+          onClick: () => alert("Cancel Request"),
+        },
+      ],
+    });
+  };
 
   const ManageTags = () => {
     return (
@@ -61,6 +103,14 @@ export const PostDetails = () => {
         <div className="button__return">
           <ViewComments />
         </div>
+        <button
+          color="primary"
+          onClick={() => {
+            confirmPostDelete(post.id);
+          }}
+        >
+          Delete
+        </button>
       </section>
     </>
   );
