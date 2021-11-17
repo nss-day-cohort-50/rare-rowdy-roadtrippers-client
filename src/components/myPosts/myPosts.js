@@ -5,6 +5,7 @@ import { Link, useHistory } from "react-router-dom"
 
 export const MyPosts = () => {
   const [posts, setPosts] = useState([]);
+  const history = useHistory()
 
 
   const userId = parseInt(localStorage.getItem("token"));
@@ -65,6 +66,9 @@ export const MyPosts = () => {
   return (
     <>
       <h1>My Posts</h1>
+      <div>
+        <button className="createPost" onClick={() => history.push("/posts/create")}>New Post</button>
+      </div>
 
       {posts.map((post) => (
         <div key={post.id}>
