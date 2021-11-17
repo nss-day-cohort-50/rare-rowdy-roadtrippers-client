@@ -93,6 +93,9 @@ export const PostDetails = () => {
     return (
         <>
             <h1 className="post__header">Post Details</h1>
+            <div>
+                <button className="createPost" onClick={() => history.push("/posts/create")}>New Post</button>
+            </div>
             <section className="post__details">
                 <h3 className="post__heading">{post.title}</h3>
                 <div className="post__item">Content: {post?.content}</div>
