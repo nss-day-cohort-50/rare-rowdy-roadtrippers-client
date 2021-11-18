@@ -24,12 +24,18 @@ export const TagsList = () => {
     )
 
     const deleteTag = (id) => {
-        fetch(`http://localhost:8088/tags/${id}`, {
+        fetch(`http://localhost:8000/tags/${id}`, {
             method: "DELETE",
-            "Authorization": `Token ${localStorage.getItem("token")}`
+            headers: {
+                "Authorization": `Token ${localStorage.getItem("token")}`
+            }
         })
             .then(() => {
-                fetch("http://localhost:8000/tags")
+                fetch("http://localhost:8000/tags", {
+                    headers: {
+                        "Authorization": `Token ${localStorage.getItem("token")}`
+                    }
+                })
                     .then(res => res.json())
                     .then((tags) => {
                         updateTags(tags)
@@ -76,7 +82,8 @@ export const TagsList = () => {
                                         className="item__tagList"/>
                                 </fieldset>
                             </div>
-                                <button color="primary" onClick={() => {
+                                <button color="primary" onClick={(event) => {
+                                    event.preventDefault()
                                     confirmDelete(tag.id)
                                 }}>Delete</button>
                             </>
